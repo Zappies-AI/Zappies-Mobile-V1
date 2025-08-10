@@ -1,11 +1,63 @@
-// screens/main/BotSettingsScreen.js
 // A placeholder screen for bot settings and configuration with new styles.
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
-import { Colors, Spacing, Typography } from '../../styles/theme';
+import { Spacing, Typography } from '../../styles/theme';
+import { ThemeContext } from '../../context/ThemeContext';
 
 export default function BotSettingsScreen() {
+  const { theme } = useContext(ThemeContext);
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.background,
+    },
+    scrollContent: {
+      flexGrow: 1,
+      padding: Spacing.large,
+    },
+    header: {
+      ...Typography.header,
+      color: theme.text,
+      marginBottom: Spacing.large,
+    },
+    card: {
+      backgroundColor: theme.card,
+      borderRadius: 12,
+      padding: Spacing.large,
+      marginBottom: Spacing.medium,
+      shadowColor: theme.text,
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 8,
+      elevation: 5,
+    },
+    cardHeader: {
+      ...Typography.subHeader,
+      color: theme.primary,
+      marginBottom: Spacing.small,
+    },
+    cardBody: {
+      ...Typography.body,
+      color: theme.text,
+    },
+    actionButton: {
+      backgroundColor: theme.primary,
+      paddingVertical: Spacing.medium,
+      paddingHorizontal: Spacing.large,
+      borderRadius: 25,
+      marginTop: Spacing.large,
+      alignSelf: 'center',
+      width: '100%',
+      alignItems: 'center',
+    },
+    actionButtonText: {
+      color: theme.card,
+      ...Typography.subHeader,
+    },
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -22,51 +74,3 @@ export default function BotSettingsScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.background,
-  },
-  scrollContent: {
-    flexGrow: 1,
-    padding: Spacing.large,
-  },
-  header: {
-    ...Typography.header,
-    marginBottom: Spacing.large,
-  },
-  card: {
-    backgroundColor: Colors.card,
-    borderRadius: 12,
-    padding: Spacing.large,
-    marginBottom: Spacing.medium,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 5,
-  },
-  cardHeader: {
-    ...Typography.subHeader,
-    color: Colors.primary,
-    marginBottom: Spacing.small,
-  },
-  cardBody: {
-    ...Typography.body,
-    color: Colors.text,
-  },
-  actionButton: {
-    backgroundColor: Colors.primary,
-    paddingVertical: Spacing.medium,
-    paddingHorizontal: Spacing.large,
-    borderRadius: 25,
-    marginTop: Spacing.large,
-    alignSelf: 'center',
-    width: '100%',
-    alignItems: 'center',
-  },
-  actionButtonText: {
-    color: Colors.card,
-    ...Typography.subHeader,
-  },
-});

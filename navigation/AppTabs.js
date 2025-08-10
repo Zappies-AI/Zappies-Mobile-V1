@@ -1,7 +1,6 @@
-// navigation/AppTabs.js
 // This file defines the bottom tab navigator for the main app screens.
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import DashboardScreen from '../screens/main/DashboardScreen';
@@ -10,11 +9,12 @@ import BotSettingsScreen from '../screens/main/BotSettingsScreen';
 import ChatFlowBuilderScreen from '../screens/main/ChatFlowBuilderScreen';
 import AnalyticsScreen from '../screens/main/AnalyticsScreen';
 import AccountScreen from '../screens/main/AccountScreen';
-import { Colors } from '../styles/theme';
+import { ThemeContext } from '../context/ThemeContext';
 
 const AppTab = createBottomTabNavigator();
 
 export default function AppTabsScreens() {
+  const { theme } = useContext(ThemeContext);
   return (
     <AppTab.Navigator
       screenOptions={({ route }) => ({
@@ -38,12 +38,12 @@ export default function AppTabsScreens() {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: Colors.primary,
-        tabBarInactiveTintColor: Colors.subtext,
+        tabBarActiveTintColor: theme.primary,
+        tabBarInactiveTintColor: theme.subtext,
         tabBarStyle: {
-          backgroundColor: Colors.card,
+          backgroundColor: theme.card,
           borderTopWidth: 1,
-          borderTopColor: Colors.border,
+          borderTopColor: theme.border,
         },
       })}
     >
@@ -56,3 +56,4 @@ export default function AppTabsScreens() {
     </AppTab.Navigator>
   );
 }
+
