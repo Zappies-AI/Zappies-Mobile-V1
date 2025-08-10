@@ -1,5 +1,4 @@
 // navigation/AppTabs.js
-
 // This file defines the bottom tab navigator for the main app screens.
 
 import React from 'react';
@@ -11,6 +10,7 @@ import BotSettingsScreen from '../screens/main/BotSettingsScreen';
 import ChatFlowBuilderScreen from '../screens/main/ChatFlowBuilderScreen';
 import AnalyticsScreen from '../screens/main/AnalyticsScreen';
 import AccountScreen from '../screens/main/AccountScreen';
+import { Colors } from '../styles/theme';
 
 const AppTab = createBottomTabNavigator();
 
@@ -22,7 +22,6 @@ export default function AppTabsScreens() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          // Set the icon based on the screen name.
           if (route.name === 'Dashboard') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Leads') {
@@ -30,15 +29,21 @@ export default function AppTabsScreens() {
           } else if (route.name === 'Bot Settings') {
             iconName = focused ? 'cog' : 'cog-outline';
           } else if (route.name === 'Chat Flow') {
-            iconName = focused ? 'chatbubbles' : 'chatbubbles-outline';
+            iconName = focused ? 'git-branch' : 'git-branch-outline';
           } else if (route.name === 'Analytics') {
             iconName = focused ? 'stats-chart' : 'stats-chart-outline';
           } else if (route.name === 'Account') {
             iconName = focused ? 'person' : 'person-outline';
           }
 
-          // Return the Ionicons component.
           return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: Colors.primary,
+        tabBarInactiveTintColor: Colors.subtext,
+        tabBarStyle: {
+          backgroundColor: Colors.card,
+          borderTopWidth: 1,
+          borderTopColor: Colors.border,
         },
       })}
     >

@@ -1,15 +1,19 @@
 // screens/main/AccountScreen.js
-// A placeholder screen for user account management.
+// A placeholder screen for user account management with new styles.
 
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { Colors, Spacing, Typography } from '../../styles/theme';
 
 export default function AccountScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Text style={styles.header}>Account</Text>
-        <Text style={styles.placeholderText}>Upgrade to Pro, support, and settings.</Text>
+        <View style={styles.card}>
+          <Text style={styles.cardHeader}>Upgrade to Pro</Text>
+          <Text style={styles.cardBody}>Get more features and analytics with a Pro subscription.</Text>
+        </View>
         <TouchableOpacity style={styles.actionButton}>
           <Text style={styles.actionButtonText}>Upgrade to Pro</Text>
         </TouchableOpacity>
@@ -21,33 +25,48 @@ export default function AccountScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f7f7f7',
+    backgroundColor: Colors.background,
   },
   scrollContent: {
     flexGrow: 1,
-    padding: 20,
+    padding: Spacing.large,
   },
   header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#333',
+    ...Typography.header,
+    marginBottom: Spacing.large,
   },
-  placeholderText: {
-    fontSize: 16,
-    color: '#999',
-    marginBottom: 10,
+  card: {
+    backgroundColor: Colors.card,
+    borderRadius: 12,
+    padding: Spacing.large,
+    marginBottom: Spacing.medium,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  cardHeader: {
+    ...Typography.subHeader,
+    color: Colors.primary,
+    marginBottom: Spacing.small,
+  },
+  cardBody: {
+    ...Typography.body,
+    color: Colors.text,
   },
   actionButton: {
-    backgroundColor: '#007AFF',
-    paddingVertical: 12,
-    paddingHorizontal: 20,
+    backgroundColor: Colors.primary,
+    paddingVertical: Spacing.medium,
+    paddingHorizontal: Spacing.large,
     borderRadius: 25,
-    marginTop: 20,
-    alignSelf: 'flex-start',
+    marginTop: Spacing.large,
+    alignSelf: 'center',
+    width: '100%',
+    alignItems: 'center',
   },
   actionButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: Colors.card,
+    ...Typography.subHeader,
   },
 });

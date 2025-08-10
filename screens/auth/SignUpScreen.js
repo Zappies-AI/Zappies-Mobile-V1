@@ -1,9 +1,10 @@
 // screens/auth/SignUpScreen.js
-// This screen handles the user sign-up flow.
+// This screen handles the user sign-up flow with new styles.
 
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, ActivityIndicator } from 'react-native';
 import { supabase } from '../../supabase/client';
+import { Colors, Spacing, Typography } from '../../styles/theme';
 
 export default function SignUpScreen({ navigation }) {
   const [email, setEmail] = useState('');
@@ -18,8 +19,6 @@ export default function SignUpScreen({ navigation }) {
     if (error) {
       setError(error.message);
     } else {
-      // Navigate to the sign-in screen after successful sign-up.
-      // Supabase will automatically send a confirmation email.
       navigation.navigate('SignIn');
     }
     setLoading(false);
@@ -27,32 +26,40 @@ export default function SignUpScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Sign Up for Zappy Bot</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      {error ? <Text style={styles.errorText}>{error}</Text> : null}
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handleSignUp}
-        disabled={loading}
-      >
-        <Text style={styles.buttonText}>{loading ? 'Signing Up...' : 'Sign Up'}</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
-        <Text style={styles.linkText}>Already have an account? Sign In</Text>
-      </TouchableOpacity>
+      <View style={styles.card}>
+        <Text style={styles.title}>Create your Zappy Bot Account</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor={Colors.subtext}
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor={Colors.subtext}
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
+        {error ? <Text style={styles.errorText}>{error}</Text> : null}
+        <TouchableOpacity
+          style={[styles.button, loading && styles.buttonDisabled]}
+          onPress={handleSignUp}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color={Colors.card} />
+          ) : (
+            <Text style={styles.buttonText}>Sign Up</Text>
+          )}
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+          <Text style={styles.linkText}>Already have an account? Sign In</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
@@ -62,44 +69,58 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    backgroundColor: '#f7f7f7',
+    backgroundColor: Colors.background,
+  },
+  card: {
+    width: '90%',
+    maxWidth: 400,
+    backgroundColor: Colors.card,
+    borderRadius: 12,
+    padding: Spacing.large,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 5,
   },
   title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#333',
+    ...Typography.header,
+    textAlign: 'center',
+    marginBottom: Spacing.large,
   },
   input: {
     width: '100%',
-    padding: 15,
+    padding: Spacing.medium,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: Colors.border,
     borderRadius: 8,
-    marginBottom: 15,
-    backgroundColor: '#fff',
+    marginBottom: Spacing.medium,
+    backgroundColor: Colors.card,
+    ...Typography.body,
   },
   button: {
     width: '100%',
-    padding: 15,
-    backgroundColor: '#007AFF',
+    padding: Spacing.medium,
+    backgroundColor: Colors.primary,
     borderRadius: 8,
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: Spacing.medium,
+  },
+  buttonDisabled: {
+    backgroundColor: Colors.subtext,
   },
   buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
+    color: Colors.card,
+    ...Typography.subHeader,
   },
   linkText: {
-    color: '#007AFF',
-    marginTop: 10,
+    color: Colors.primary,
+    ...Typography.body,
+    textAlign: 'center',
   },
   errorText: {
-    color: 'red',
-    marginBottom: 10,
+    color: Colors.error,
+    marginBottom: Spacing.medium,
     textAlign: 'center',
   },
 });
