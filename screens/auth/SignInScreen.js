@@ -1,13 +1,14 @@
+// ./screens/auth/SignInScreen.js
 // This screen handles the user sign-in flow with new styles.
-
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, ActivityIndicator } from 'react-native';
-import { supabase } from '../../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext'; // Import AuthContext to get masterSupabase
 import { Spacing, Typography } from '../../styles/theme';
 import { ThemeContext } from '../../context/ThemeContext';
 
 export default function SignInScreen({ navigation }) {
   const { theme } = useContext(ThemeContext);
+  const { masterSupabase } = useContext(AuthContext); // Correctly get masterSupabase from AuthContext
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -16,7 +17,7 @@ export default function SignInScreen({ navigation }) {
   const handleSignIn = async () => {
     setLoading(true);
     setError('');
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await masterSupabase.auth.signInWithPassword({ email, password }); // Use masterSupabase
     if (error) {
       setError(error.message);
     }
@@ -125,4 +126,3 @@ export default function SignInScreen({ navigation }) {
     </SafeAreaView>
   );
 }
-

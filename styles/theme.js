@@ -1,3 +1,4 @@
+// ./styles/theme.js
 // Centralized theme file for the app's colors and styling.
 
 export const Spacing = {

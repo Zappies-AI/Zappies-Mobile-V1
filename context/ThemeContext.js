@@ -1,3 +1,4 @@
+// ./context/ThemeContext.js
 // This file manages the app's light and dark theme state.
 
 import React, { useState, createContext } from 'react';

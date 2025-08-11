@@ -1,3 +1,4 @@
+// ./navigation/AuthStack.js
 // This file defines the navigation stack for the authentication flow.
 
 import React, { useContext } from 'react';

@@ -1,3 +1,4 @@
+// ./navigation/AppTabs.js
 // This file defines the bottom tab navigator for the main app screens.
 
 import React, { useContext } from 'react';
@@ -20,7 +21,7 @@ import { AccountScreen } from '../screens/main/AccountScreen';
 import { ThemeContext } from '../context/ThemeContext';
 
 const AppTab = createBottomTabNavigator();
-console.log('AppTabs.js: AppTab created successfully');
+
 export default function AppTabsScreens() {
   const { theme } = useContext(ThemeContext);
   return (

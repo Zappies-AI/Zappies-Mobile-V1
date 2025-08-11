@@ -1,13 +1,15 @@
+// ./screens/auth/SignUpScreen.js
 // This screen handles the user sign-up flow with new styles and a success message.
 
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, ActivityIndicator } from 'react-native';
-import { supabase } from '../../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext'; // Import AuthContext to get masterSupabase
 import { Spacing, Typography } from '../../styles/theme';
 import { ThemeContext } from '../../context/ThemeContext';
 
 export default function SignUpScreen({ navigation }) {
   const { theme } = useContext(ThemeContext);
+  const { masterSupabase } = useContext(AuthContext); // Correctly get masterSupabase from AuthContext
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -18,7 +20,7 @@ export default function SignUpScreen({ navigation }) {
     setLoading(true);
     setError('');
     setSuccessMessage('');
-    const { error } = await supabase.auth.signUp({ email, password });
+    const { error } = await masterSupabase.auth.signUp({ email, password }); // Use masterSupabase
     if (error) {
       setError(error.message);
     } else {
@@ -26,8 +28,6 @@ export default function SignUpScreen({ navigation }) {
       setSuccessMessage('Successfully signed up! Please check your email to confirm your account.');
       setEmail('');
       setPassword('');
-      // Optionally, you could also navigate the user to the sign-in screen here
-      // navigation.navigate('SignIn');
     }
     setLoading(false);
   };
@@ -140,6 +140,3 @@ export default function SignUpScreen({ navigation }) {
     </SafeAreaView>
   );
 }
-
-
-

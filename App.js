@@ -1,3 +1,4 @@
+// ./ App.js
 // This is the main entry point of the app.
 
 import 'react-native-gesture-handler'; // Required for React Navigation.

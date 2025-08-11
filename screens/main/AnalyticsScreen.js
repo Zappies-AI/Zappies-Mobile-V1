@@ -1,3 +1,4 @@
+//./context/AuthContext.js
 // This is the AnalyticsScreen component.
 // It uses a named export, which is required for the import statement in AppTabs.js.
 import React from 'react';

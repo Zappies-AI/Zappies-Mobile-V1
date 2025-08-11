@@ -1,3 +1,4 @@
+// ./supabase/client.js
 // This file centralizes your Supabase client setup.
 //supabase/client.js
 

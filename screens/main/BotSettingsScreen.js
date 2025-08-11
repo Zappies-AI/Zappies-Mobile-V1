@@ -1,4 +1,4 @@
-// This is the BotSettingsScreen component.
+// ./screens/main/BotSettingsScreen.js
 // It uses a named export, which is required for the import statement in AppTabs.js.
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
