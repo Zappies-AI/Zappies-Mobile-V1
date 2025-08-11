@@ -1,55 +1,48 @@
-// ./styles/theme.js
-// Centralized theme file for the app's colors and styling.
+// theme.js
+// A simple object to define the application's theme, including colors, typography, and spacing.
 
-export const Spacing = {
-  small: 8,
-  medium: 16,
-  large: 24,
-  xlarge: 32,
-};
-
-export const Typography = {
-  header: {
-    fontSize: 28,
-    fontWeight: 'bold',
+const theme = {
+  colors: {
+    primary: '#4f46e5', // A deep indigo
+    secondary: '#10b981', // A bright teal
+    accent: '#f43f5e', // A rose color
+    background: '#f9fafb', // Light gray background
+    surface: '#ffffff', // White surface for cards and containers
+    text: {
+      primary: '#1f2937', // Dark gray for main text
+      secondary: '#6b7280', // Medium gray for secondary text
+      muted: '#9ca3af', // Light gray for muted text
+    },
+    border: '#e5e7eb', // Light gray for borders
   },
-  subHeader: {
-    fontSize: 20,
-    fontWeight: '600',
+  typography: {
+    fontFamily: 'Inter, sans-serif',
+    h1: {
+      fontSize: '2.25rem', // 36px
+      fontWeight: '700', // bold
+    },
+    h2: {
+      fontSize: '1.5rem', // 24px
+      fontWeight: '600', // semi-bold
+    },
+    body: {
+      fontSize: '1rem', // 16px
+      fontWeight: '400', // regular
+    },
   },
-  body: {
-    fontSize: 16,
+  spacing: {
+    xs: '0.25rem', // 4px
+    sm: '0.5rem', // 8px
+    md: '1rem', // 16px
+    lg: '1.5rem', // 24px
+    xl: '2rem', // 32px
   },
-  label: {
-    fontSize: 14,
-    fontWeight: '500',
-  },
-};
-
-export const Themes = {
-  light: {
-    primary: '#FF8C00', // A warm orange
-    secondary: '#FFB84D', // A lighter orange for highlights
-    background: '#FDF4E3', // A very light cream/off-white background
-    card: '#FFFFFF', // White for cards and containers
-    text: '#3E2723', // Dark brown for body text
-    subtext: '#8D6E63', // Lighter brown for secondary text
-    accent: '#FFD700', // A nice gold for accent colors
-    error: '#B71C1C', // A deep red for error messages
-    border: '#D7CCC8', // Light brown for borders
-    modeToggleIcon: 'moon-outline',
-  },
-  dark: {
-    primary: '#FF8C00', // A warm orange
-    secondary: '#FFB84D', // A lighter orange for highlights
-    background: '#1C1C1E', // A dark gray background
-    card: '#2C2C2E', // A slightly lighter dark gray for cards
-    text: '#EFEFEF', // Off-white for body text
-    subtext: '#AEAEB2', // Light gray for secondary text
-    accent: '#FFD700', // A nice gold for accent colors
-    error: '#CF6679', // A soft red for error messages
-    border: '#48484A', // Dark gray for borders
-    modeToggleIcon: 'sunny-outline',
+  borderRadius: {
+    sm: '0.25rem', // 4px
+    md: '0.5rem', // 8px
+    lg: '0.75rem', // 12px
+    xl: '1rem', // 16px
   },
 };
 
+export default theme;
