@@ -1,4 +1,4 @@
-// This screen handles the user sign-up flow with new styles.
+// This screen handles the user sign-up flow with new styles and a success message.
 
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, ActivityIndicator } from 'react-native';
@@ -12,15 +12,22 @@ export default function SignUpScreen({ navigation }) {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleSignUp = async () => {
     setLoading(true);
     setError('');
+    setSuccessMessage('');
     const { error } = await supabase.auth.signUp({ email, password });
     if (error) {
       setError(error.message);
     } else {
-      navigation.navigate('SignIn');
+      // Set success message and clear fields after successful sign-up
+      setSuccessMessage('Successfully signed up! Please check your email to confirm your account.');
+      setEmail('');
+      setPassword('');
+      // Optionally, you could also navigate the user to the sign-in screen here
+      // navigation.navigate('SignIn');
     }
     setLoading(false);
   };
@@ -86,6 +93,11 @@ export default function SignUpScreen({ navigation }) {
       marginBottom: Spacing.medium,
       textAlign: 'center',
     },
+    successText: {
+      color: theme.primary,
+      marginBottom: Spacing.medium,
+      textAlign: 'center',
+    },
   });
 
   return (
@@ -109,6 +121,7 @@ export default function SignUpScreen({ navigation }) {
           secureTextEntry
         />
         {error ? <Text style={styles.errorText}>{error}</Text> : null}
+        {successMessage ? <Text style={styles.successText}>{successMessage}</Text> : null}
         <TouchableOpacity
           style={[styles.button, loading && styles.buttonDisabled]}
           onPress={handleSignUp}
@@ -127,3 +140,6 @@ export default function SignUpScreen({ navigation }) {
     </SafeAreaView>
   );
 }
+
+
+

@@ -1,15 +1,17 @@
 // This screen serves as the main authenticated dashboard with new styles.
 
-import React, { useContext } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Modal, Pressable } from 'react-native';
 import { supabase } from '../../context/AuthContext';
 import { Spacing, Typography } from '../../styles/theme';
 import { ThemeContext } from '../../context/ThemeContext';
 
 export default function DashboardScreen() {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const [showSignOutModal, setShowSignOutModal] = useState(false);
 
   const handleSignOut = async () => {
+    setShowSignOutModal(false);
     await supabase.auth.signOut();
   };
 
@@ -89,7 +91,57 @@ export default function DashboardScreen() {
       ...Typography.body,
       color: theme.text,
       marginLeft: Spacing.small,
-    }
+    },
+    centeredView: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0,0,0,0.5)',
+    },
+    modalView: {
+      width: '80%',
+      backgroundColor: theme.card,
+      borderRadius: 12,
+      padding: Spacing.large,
+      alignItems: 'center',
+      shadowColor: theme.text,
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5,
+    },
+    modalText: {
+      ...Typography.subHeader,
+      marginBottom: Spacing.large,
+      textAlign: 'center',
+      color: theme.text,
+    },
+    modalButtonContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: '100%',
+    },
+    modalButton: {
+      flex: 1,
+      borderRadius: 8,
+      padding: Spacing.medium,
+      elevation: 2,
+      marginHorizontal: Spacing.small,
+    },
+    buttonClose: {
+      backgroundColor: theme.border,
+    },
+    buttonSignOut: {
+      backgroundColor: theme.error,
+    },
+    textStyle: {
+      color: theme.card,
+      ...Typography.body,
+      textAlign: 'center',
+    },
   });
 
   return (
@@ -114,12 +166,38 @@ export default function DashboardScreen() {
         <TouchableOpacity style={styles.actionButton}>
           <Text style={styles.actionButtonText}>View Leads</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.signOutButton} onPress={handleSignOut}>
+        <TouchableOpacity style={styles.signOutButton} onPress={() => setShowSignOutModal(true)}>
           <Text style={styles.signOutButtonText}>Sign Out</Text>
         </TouchableOpacity>
       </ScrollView>
+
+      {/* Sign Out Confirmation Modal */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={showSignOutModal}
+        onRequestClose={() => setShowSignOutModal(false)}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Are you sure you want to sign out?</Text>
+            <View style={styles.modalButtonContainer}>
+              <Pressable
+                style={[styles.modalButton, styles.buttonClose]}
+                onPress={() => setShowSignOutModal(false)}
+              >
+                <Text style={styles.textStyle}>Cancel</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.modalButton, styles.buttonSignOut]}
+                onPress={handleSignOut}
+              >
+                <Text style={styles.textStyle}>Sign Out</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
-
-
