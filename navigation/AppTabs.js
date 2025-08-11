@@ -3,16 +3,24 @@
 import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import DashboardScreen from '../screens/main/DashboardScreen';
-import LeadsPageScreen from '../screens/main/LeadsPageScreen';
-import BotSettingsScreen from '../screens/main/BotSettingsScreen';
-import ChatFlowBuilderScreen from '../screens/main/ChatFlowBuilderScreen';
-import AnalyticsScreen from '../screens/main/AnalyticsScreen';
-import AccountScreen from '../screens/main/AccountScreen';
+
+// Import all screen components from the 'main' sub-directory inside the 'screens' folder.
+// The relative path from 'navigation' to 'screens/main' is '../screens/main'.
+// The import statements have been corrected to use named imports instead of default imports.
+// import { DashboardScreen } from '../screens/main/DashboardScreen';
+import { DashboardScreen } from '../screens/main/DashboardScreen';
+import { LeadsPageScreen } from '../screens/main/LeadsPageScreen';
+import { BotSettingsScreen } from '../screens/main/BotSettingsScreen';
+import { ChatFlowBuilderScreen } from '../screens/main/ChatFlowBuilderScreen';
+import { AnalyticsScreen } from '../screens/main/AnalyticsScreen';
+import { AccountScreen } from '../screens/main/AccountScreen';
+
+// Import the ThemeContext from the 'context' folder.
+// The relative path from 'navigation' to 'context' is '../context'.
 import { ThemeContext } from '../context/ThemeContext';
 
 const AppTab = createBottomTabNavigator();
-
+console.log('AppTabs.js: AppTab created successfully');
 export default function AppTabsScreens() {
   const { theme } = useContext(ThemeContext);
   return (
@@ -56,4 +64,3 @@ export default function AppTabsScreens() {
     </AppTab.Navigator>
   );
 }
-
