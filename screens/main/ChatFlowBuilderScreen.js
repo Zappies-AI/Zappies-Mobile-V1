@@ -1,25 +1,47 @@
-// ./screens/main/ChatFlowBuilderScreen.js
-// This is the ChatFlowBuilderScreen component.
-// It uses a named export, which is required for the import statement in AppTabs.js.
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useContext } from 'react';
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
+import { ThemeContext } from '../../context/ThemeContext';
+import { Spacing, Typography } from '../../styles/theme';
 
-export function ChatFlowBuilderScreen() {
+export function ChatFlowBuilderScreen({ navigation }) {
+  const { theme } = useContext(ThemeContext);
   const styles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
+      backgroundColor: theme.background,
+      padding: Spacing.large,
     },
-    text: {
-      fontSize: 24,
-      fontWeight: 'bold',
+    header: {
+      ...Typography.header,
+      color: theme.text,
+      marginBottom: Spacing.large,
+    },
+    subHeader: {
+      ...Typography.body,
+      color: theme.subtext,
+      textAlign: 'center',
+    },
+    backButton: {
+      marginTop: Spacing.large,
+      padding: Spacing.medium,
+      backgroundColor: theme.primary,
+      borderRadius: 25,
+    },
+    backButtonText: {
+      ...Typography.subHeader,
+      color: theme.card,
     },
   });
-
+  
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Chat Flow Builder Screen</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.header}>Chat Flow Page</Text>
+      <Text style={styles.subHeader}>This is where you can design your bot's conversational flow.</Text>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <Text style={styles.backButtonText}>Go Back</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 }
